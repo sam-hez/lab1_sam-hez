@@ -12,7 +12,7 @@ def load_csv_data():
     filename = input("Enter the name of the CSV file to process (e.g., grades.csv): ")
     
     if not os.path.exists(filename):
-        print(f"Error: The file '{filename}' was not found.")
+        print(f"\033[31mError: The file '{filename}' was not found. \033[0m")
         sys.exit(1)
         
     assignments = []
@@ -32,15 +32,15 @@ def load_csv_data():
     
     #CSV Error Handling (missing column in csv & score and weight numeric validation)
     except KeyError as e:
-        print(f"ERROR: Missing required column in CSV: {e}")
+        print(f"\033[31mERROR: Missing required column in CSV: {e} \033[0m")
         sys.exit(1)
 
     except ValueError:
-        print("ERROR: The SCORE and WEIGHT must be numeric values.")
+        print("\033[31mERROR: The SCORE and WEIGHT must be numeric values. \033[0m")
         sys.exit(1)
 
     except Exception as e:
-        print(f"An error occurred while reading the file: {e}")
+        print(f"\033[31mERROR: An error occurred while reading the file: {e} \033[0m")
         sys.exit(1)
 
 def evaluate_grades(data):
@@ -49,11 +49,11 @@ def evaluate_grades(data):
     calculating final grade and GPA, checking pass/fail,
     and identifying the resubmission options
     """
-    print("\n--- Processing Grades ---")
+    print("\n\033[32m--- Processing Grades --- \033[0m")
 
     #Error Handling for empty CSV file
     if not data:
-        print("ERROR: The CSV file is empty. No grades to process.")
+        print("\033[31mERROR: The CSV file is empty. No grades to process. \033[0m")
         return
     
     total_weight = 0
@@ -74,17 +74,17 @@ def evaluate_grades(data):
 
         # 1. Validate the score range
         if score < 0 or score > 100:
-            print(f"ERROR: '{assignment}' has an invalid score of {score}. The Scores must be between 0 - 100 ")
+            print(f"\033[31mERROR: '{assignment}' has an invalid score of {score}. The Scores must be between 0 - 100 \033[0m")
             return
         
         # 2. Validate the weight range
         if weight < 0 or weight > 100:
-            print(f"ERROR: '{assignment}' has an invalid weight of {weight}. The Weights must be between 0 - 100")
+            print(f"\033[31mERROR: '{assignment}' has an invalid weight of {weight}. The Weights must be between 0 - 100 \033[0m")
             return
         
         # 3. Validate the group name
         if group not in ["Formative", "Summative"]:
-            print(f"ERROR: '{assignment}' has an invalid group '{group}'. Use only Formative and Summative groups ")
+            print(f"\033[31mERROR: '{assignment}' has an invalid group '{group}'. Use only Formative and Summative groups \033[0m")
             return
         
         weighted_score = (score * weight) / 100
@@ -104,15 +104,15 @@ def evaluate_grades(data):
 
     # 4. Validate the weights
     if total_weight != 100:
-        print(f"ERROR: Total Weight is {total_weight}, but it must be exactly 100")
+        print(f"\033[31mERROR: Total Weight is {total_weight}, but it must be exactly 100 \033[0m")
         return
         
     if formative_weight != 60:
-        print(f"ERROR: Formative Weight {formative_weight}, but it must be exactly 60")
+        print(f"\033[31mERROR: Formative Weight {formative_weight}, but it must be exactly 60 \033[0m")
         return
         
     if summative_weight != 40:
-        print(f"ERROR: Summative Weight is {summative_weight}, but it must be exactly 40 ")
+        print(f"\033[31mERROR: Summative Weight is {summative_weight}, but it must be exactly 40 \033[0m")
         return
     
     # 5. Calculate the category percentages 
@@ -124,9 +124,9 @@ def evaluate_grades(data):
 
     #7. Determine the final status
     if formative_percentage >= 50 and summative_percentage >= 50:
-        status = "PASSED"
+        status = "\033[32mPASSED \033[0m"
     else:
-        status = "FAILED"
+        status = "\033[31mFAILED \033[0m"
 
     # 8. Determine resubmission options
     resubmission_assignments = []
@@ -140,8 +140,8 @@ def evaluate_grades(data):
         ]
 
     # 9. Print Results
-    print(f"Final Grade: {total_grade:.2f}%")
-    print(f"GPA: {gpa:.2f}/5.00")
+    print(f"\033[32mFinal Grade: {total_grade:.2f}% \033[0m")
+    print(f"\033[32mGPA: {gpa:.2f}/5.00 \033[0m") 
     print(f"Formative Percentage: {formative_percentage:.2f}%")
     print(f"Summative Percentage: {summative_percentage:.2f}%")
     print(f"Final Status: {status}")
@@ -152,6 +152,9 @@ def evaluate_grades(data):
             print(f"- {assignment}")
     else:
         print("No formative resubmission needed.")
+
+    print("-" * 35)
+    print()
     
 
 if __name__ == "__main__":

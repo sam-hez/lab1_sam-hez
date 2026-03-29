@@ -1,4 +1,5 @@
 # Lab 1 - Grade Evaluator & Archiver
+By: Samuel Epodoi [C2 BSE]
 
 ## Repository Contents
 - `grade-evaluator.py` - Python program for evaluating grades
