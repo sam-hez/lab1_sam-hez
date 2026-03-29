@@ -140,18 +140,19 @@ def evaluate_grades(data):
         ]
 
     # 9. Print Results
+    print(f"Final Grade: {total_grade:.2f}%")
+    print(f"GPA: {gpa:.2f}/5.00")
+    print(f"Formative Percentage: {formative_percentage:.2f}%")
+    print(f"Summative Percentage: {summative_percentage:.2f}%")
+    print(f"Final Status: {status}")
+
+    if resubmission_assignments:
+        print("Eligible Formative Assignment(s) for Resubmission:")
+        for assignment in resubmission_assignments:
+            print(f"- {assignment}")
+    else:
+        print("No formative resubmission needed.")
     
-
-
-
-
-
-
-
-        
-
-    
-    pass
 
 if __name__ == "__main__":
     # 1. Load the data
