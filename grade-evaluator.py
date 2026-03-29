@@ -119,7 +119,12 @@ def evaluate_grades(data):
     formative_percentage = (formative_points / formative_weight) * 100
     summative_percentage = (summative_points / summative_weight) * 100
 
-        
+    # 6. Calculate GPA
+    gpa = (total_grade / 100) + 5.0
+
+    #7. 
+
+
 
 
 
