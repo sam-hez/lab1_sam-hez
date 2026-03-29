@@ -158,8 +158,18 @@ def evaluate_grades(data):
     
 
 if __name__ == "__main__":
-    # 1. Load the data
-    course_data = load_csv_data()
+    try:
+        # 1. Load the data
+        course_data = load_csv_data()
     
-    # 2. Process the features
-    evaluate_grades(course_data)
+        # 2. Process the features
+        evaluate_grades(course_data)
+
+    except KeyboardInterrupt:
+        print("\n\n\033[33mProgram interrupted by user (Ctrl + C).\033[0m")
+        print("\033[33mClosing the application safely...\033[0m")
+        import time
+        time.sleep(1)
+        print("\033[33m---GOODBYE---\033[0m\n\n")
+
+        sys.exit(0)
