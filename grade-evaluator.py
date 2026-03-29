@@ -122,7 +122,13 @@ def evaluate_grades(data):
     # 6. Calculate GPA
     gpa = (total_grade / 100) + 5.0
 
-    #7. 
+    #7. Determine the final status
+    if formative_percentage >= 50 and summative_percentage >= 50:
+        status = "PASSED"
+    else:
+        status = "FAILED"
+
+        
 
 
 
