@@ -120,7 +120,7 @@ def evaluate_grades(data):
     summative_percentage = (summative_points / summative_weight) * 100
 
     # 6. Calculate GPA
-    gpa = (total_grade / 100) + 5.0
+    gpa = (total_grade / 100) * 5.0
 
     #7. Determine the final status
     if formative_percentage >= 50 and summative_percentage >= 50:
