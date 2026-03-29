@@ -30,11 +30,11 @@ def load_csv_data():
     
     #CSV Error Handling (missing column in csv & score and weight numeric validation)
     except KeyError as e:
-        print(f"Error: Missing required column in CSV: {e}")
+        print(f"ERROR: Missing required column in CSV: {e}")
         sys.exit(1)
 
     except ValueError:
-        print("Error: The SCORE and WEIGHT must be numeric values.")
+        print("ERROR: The SCORE and WEIGHT must be numeric values.")
         sys.exit(1)
 
     except Exception as e:
@@ -43,10 +43,70 @@ def load_csv_data():
 
 def evaluate_grades(data):
     """
-    Implement your logic here.
-    'data' is a list of dictionaries containing the assignment records.
+    Evaluates the students' grades by validating scores and weights,
+    calculating final grade and GPA, checking pass/fail,
+    and identifying the resubmission options
     """
     print("\n--- Processing Grades ---")
+
+    #Error Handling for empty CSV file
+    if not data:
+        print("ERROR: The CSV file is empty. No grades to process.")
+        return
+    
+    total_weight = 0
+    formative_weight = 0
+    summative_weight = 0
+
+    total_grade = 0
+    formative_points = 0
+    summative_points = 0
+
+    failed_formative = []
+
+    for item in data:
+        assignment = item['assignment']
+        group = item['group']
+        score = item['score']
+        weight = item['weight']
+
+        # 1. Validate the score range
+        if score < 0 or score > 100:
+            print(f"ERROR: '{assignment}' has an invalid score of {score}. The Scores must be between 0 - 100 ")
+            return
+        
+        # 2. Validate the weight range
+        if weight < 0 or weight > 100:
+            print(f"ERROR: '{assignment}' has an invalid weight of {weight}. The Weights must be between 0 - 100")
+            return
+        
+        # 3. Validate the group name
+        if group not in ["Formative", "Summative"]:
+            print(f"ERROR: '{assignment}' has an invalid group '{group}'. Use only Formative and Summative groups ")
+            return
+        
+        weighted_score = (score * weight) / 100
+        total_grade += weighted_score
+        total_weight += weight
+
+        if group == "Formative":
+            formative_weight += weight
+            formative_points += weighted_score
+
+            if score < 50:
+                failed_formative.append(item)
+        
+        elif group == "Summative":
+            summative_weight += weight
+            summative_points += weighted_score
+
+
+        
+
+
+        
+        
+
     
     # TODO: a) Check if all scores are percentage based (0-100)
     # TODO: b) Validate total weights (Total=100, Summative=40, Formative=60)
