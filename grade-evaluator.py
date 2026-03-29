@@ -27,6 +27,16 @@ def load_csv_data():
                     'weight': float(row['weight'])
                 })
         return assignments
+    
+    #CSV Error Handling (missing column in csv & score and weight numeric validation)
+    except KeyError as e:
+        print(f"Error: Missing required column in CSV: {e}")
+        sys.exit(1)
+
+    except ValueError:
+        print("Error: The SCORE and WEIGHT must be numeric values.")
+        sys.exit(1)
+
     except Exception as e:
         print(f"An error occurred while reading the file: {e}")
         sys.exit(1)
