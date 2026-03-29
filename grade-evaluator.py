@@ -102,6 +102,21 @@ def evaluate_grades(data):
             summative_weight += weight
             summative_points += weighted_score
 
+    # 4. Validate the weights
+    if total_weight != 100:
+        print(f"ERROR: Total Weight is {total_weight}, but it must be exactly 100")
+        return
+        
+    if formative_weight != 60:
+        print(f"ERROR: Formative Weight {formative_weight}, but it must be exactly 60")
+        return
+        
+    if summative_weight != 40:
+        print(f"ERROR: Summative Weight is {summative_weight}, but it must be exactly 40 ")
+        return
+        
+
+
 
         
 
