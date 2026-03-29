@@ -114,24 +114,17 @@ def evaluate_grades(data):
     if summative_weight != 40:
         print(f"ERROR: Summative Weight is {summative_weight}, but it must be exactly 40 ")
         return
-        
-
-
-
-        
-
-
-        
-        
-
     
-    # TODO: a) Check if all scores are percentage based (0-100)
-    # TODO: b) Validate total weights (Total=100, Summative=40, Formative=60)
-    # TODO: c) Calculate the Final Grade and GPA
-    # TODO: d) Determine Pass/Fail status (>= 50% in BOTH categories)
-    # TODO: e) Check for failed formative assignments (< 50%)
-    #          and determine which one(s) have the highest weight for resubmission.
-    # TODO: f) Print the final decision (PASSED / FAILED) and resubmission options
+    # 5. Calculate the category percentages 
+    formative_percentage = (formative_points / formative_weight) * 100
+    summative_percentage = (summative_points / summative_weight) * 100
+
+        
+
+
+
+        
+
     
     pass
 
