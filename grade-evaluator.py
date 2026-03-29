@@ -128,7 +128,21 @@ def evaluate_grades(data):
     else:
         status = "FAILED"
 
-        
+    # 8. Determine resubmission options
+    resubmission_assignments = []
+
+    if failed_formative:
+        highest_weight = max(item['weight'] for item in failed_formative)
+        resubmission_assignments = [
+            item['assignment']
+            for item in failed_formative
+            if item['weight'] == highest_weight
+        ]
+
+    # 9. Print Results
+    
+
+
 
 
 
